@@ -1,0 +1,1026 @@
+/* ============================================================
+   THEME TOKENS — Light Mode
+============================================================ */
+
+:root {
+  /* Brand */
+  --primary: #7e4592;
+
+  /* Surfaces */
+  --bg: #ffffff;
+  --surface: #fafaf8;
+  --card-bg: rgba(255, 255, 255, 0.75);
+
+  /* Text */
+  --text: #111827;
+  --text-muted: #6b7280;
+
+  /* Borders */
+  --border: #e5e7eb;
+  --border-accent: rgba(126, 69, 146, 0.15);
+
+  /* Shadows */
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  --shadow-hover: 0 15px 35px rgba(0, 0, 0, 0.06);
+
+  /* Overlay */
+  --overlay-bg: rgba(250, 250, 248, 0.15);
+
+  /* Radius scale */
+  --r-sm: 0.5rem;
+  --r-md: 0.85rem;
+  --r-lg: 1.25rem;
+  --r-xl: 1.5rem;
+  --r-full: 999px;
+
+  /* Layout */
+  --max-w: 1200px;
+  --header-h: 4rem;
+}
+
+/* ============================================================
+   RESET
+============================================================ */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+img,
+video {
+  display: block;
+  width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font: inherit;
+}
+
+/* ============================================================
+   BASE
+============================================================ */
+
+body {
+  font-family: "Inter", sans-serif;
+  /* Mobile background image; overridden at the 500px breakpoint */
+  background: url("./assets/bg-mobile.png") no-repeat center / cover;
+  color: var(--text);
+  padding-top: var(--header-h);
+  padding-inline: 1rem;
+  /* Placeholder — remove once all sections are fully populated */
+  min-height: 200vh;
+  /*
+    Intentional override of html { scroll-behavior: smooth }.
+    The body override ensures CSS smooth-scroll doesn't interfere
+    with the scrollend event timing used by the anchor-scroll fix in JS.
+  */
+  scroll-behavior: auto;
+}
+
+/* ============================================================
+   SKIP LINK
+   Visually hidden until focused; lets keyboard users jump past
+   the repeated header navigation to reach the main content.
+============================================================ */
+
+.skip-link {
+  position: absolute;
+  top: -9999px;
+  left: 1rem;
+  z-index: 9999;
+  padding: 0.5rem 1rem;
+  background: var(--primary);
+  color: #ffffff;
+  border-radius: var(--r-sm);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* ============================================================
+   HEADER
+============================================================ */
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem;
+  z-index: 1000;
+  backdrop-filter: blur(12px);
+  transition: transform 0.3s ease;
+}
+
+.header.hide {
+  transform: translateY(-100%);
+}
+
+/* Brand */
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 700;
+}
+
+.logo-mark {
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--r-sm);
+  background: var(--primary);
+}
+
+.logo-text {
+  font-size: 1.25rem;
+  color: var(--text-muted);
+}
+
+.dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  background: var(--primary);
+  border-radius: var(--r-full);
+  margin-right: 0.5rem;
+}
+
+.nav-btn {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+/* Theme toggle */
+
+.fa-circle-half-stroke {
+  font-size: 1.5rem;
+  color: var(--text-muted);
+}
+
+.toggle-btn {
+  width: fit-content;
+  height: fit-content;
+  border-radius: 50%;
+  animation: glow 2s ease-in-out infinite;
+}
+
+@keyframes glow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 rgba(126, 69, 146, 0);
+  }
+  50% {
+    box-shadow:
+      0 0 20px rgba(126, 69, 146, 0.4),
+      0 0 40px rgba(126, 69, 146, 0.2);
+  }
+}
+
+/* Hamburger button */
+
+.menu-btn {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  padding: 0.5rem;
+  border-radius: 50%;
+}
+
+.menu-btn:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.menu-icon {
+  font-size: 1.5rem;
+  transition: transform 0.3s ease-in-out;
+}
+
+.menu-icon.open {
+  color: var(--text-muted);
+  transform: rotate(90deg);
+}
+
+/* Dropdown */
+
+.menu-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.menu-content {
+  position: absolute;
+  top: 60px;
+  right: 65px;
+  z-index: 1000;
+  width: fit-content;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  box-shadow: var(--shadow);
+  padding: 1rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease,
+    transform 0.3s ease;
+}
+
+.menu-content.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.menu-items {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+/*
+  Target the <a> tags directly — the hover state and transitions
+  belong on the interactive element, not the <ul> parent.
+*/
+.menu-items .items {
+  display: block;
+  width: 100%;
+  color: var(--text-muted);
+  font-weight: 600;
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+  transition:
+    color 0.2s,
+    border-color 0.2s;
+}
+
+.menu-items .items:hover {
+  color: var(--text);
+  border-bottom-color: var(--primary);
+}
+
+/* Socials */
+
+.socials {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-top: 1px solid var(--border);
+  padding-top: 1rem;
+}
+
+.socials i {
+  font-size: 1.5rem;
+  color: var(--text-muted);
+  transition: color 0.2s;
+}
+
+.socials i:hover {
+  color: var(--text);
+}
+
+/* Overlay */
+
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--overlay-bg);
+  backdrop-filter: blur(12px);
+  z-index: 900;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+}
+
+.menu-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Desktop nav — hidden on mobile, shown at 500px */
+
+.desktop-nav {
+  display: none;
+}
+
+/* ============================================================
+   HERO
+============================================================ */
+
+.hero {
+  padding: 2rem 1.25rem 4rem;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+}
+
+.badge {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--primary);
+  border-radius: var(--r-full);
+  padding: 0.5rem 0.9rem;
+  font-size: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.hero h1 {
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  line-height: 1.05;
+  font-weight: 800;
+}
+
+#typed-word {
+  color: var(--primary);
+  position: relative;
+}
+
+.typed-word {
+  display: block;
+}
+
+/* Blinking cursor rendered after the typewriter text */
+.typed-word::after {
+  content: "";
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background: currentColor;
+  margin-left: 4px;
+  animation: blink 0.8s infinite;
+}
+
+/* Required by .typed-word::after — was missing from the original file */
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.hero p {
+  font-size: 1.2rem;
+  font-weight: 600;
+  max-width: 30ch;
+  line-height: 1.5;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #ffffff;
+  padding: 0.9rem 1.5rem;
+  border-radius: var(--r-md);
+  font-weight: 600;
+}
+
+.btn-secondary {
+  padding: 0.9rem 1.5rem;
+  border: 1px solid var(--primary);
+  border-radius: var(--r-md);
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* Hero media */
+
+.hero-media {
+  margin-top: 2.5rem;
+}
+
+.hero-media img {
+  max-width: 600px;
+  margin: auto;
+  border-radius: var(--r-xl);
+}
+
+/* ============================================================
+   FEATURES
+============================================================ */
+
+.features-wrapper {
+  overflow: hidden;
+}
+
+.features {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 0 1.25rem 1rem;
+  scrollbar-width: none;
+  /*
+    Promotes .features to its own compositor layer.
+    Consider removing if the horizontal-scroll parallax effect is
+    permanently dropped — it's a non-trivial memory cost for a
+    container that is no longer being animated.
+  */
+  will-change: transform;
+}
+
+.features::-webkit-scrollbar {
+  display: none;
+}
+
+.feature {
+  flex: 0 0 220px;
+  scroll-snap-align: start;
+  background: var(--surface);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--r-lg);
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
+}
+
+.feature-icon {
+  width: 3rem;
+  height: 3rem;
+  margin: 0 auto 1rem;
+  font-size: 1rem;
+}
+
+.feature h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.feature p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.feature-accent {
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: var(--primary);
+  border-radius: var(--r-full);
+  margin: 2rem auto 0;
+}
+
+/* ============================================================
+   SECTION HEADER — shared across builds, services, team, contact
+============================================================ */
+
+.section-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 3rem;
+}
+
+.section-tag {
+  margin: auto;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--primary);
+  border-radius: var(--r-full);
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.section-header h2 {
+  font-size: clamp(1.5rem, 5vw, 3.5rem);
+  line-height: 1.1;
+  margin: 1rem auto;
+}
+
+.section-header h2 .italic {
+  font-style: italic;
+  color: var(--primary);
+}
+
+.section-header p {
+  margin: auto;
+  max-width: 40ch;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* ============================================================
+   BUILDS
+============================================================ */
+
+.builds {
+  max-width: var(--max-w);
+  margin: 2rem auto;
+  padding: 0 1.25rem;
+}
+
+.builds-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.build-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--r-xl);
+  padding: 1rem;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.build-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--primary);
+  box-shadow: var(--shadow-hover);
+}
+
+.build-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: var(--border);
+  border-radius: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.build-card h3 {
+  font-size: 1.25rem;
+  color: var(--text);
+  margin-bottom: 0.75rem;
+}
+
+.build-card p {
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* ============================================================
+   ADDITIONAL SERVICES
+============================================================ */
+
+.services {
+  max-width: var(--max-w);
+  margin: 6rem auto;
+  padding: 0 1.25rem;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.service-card {
+  background: var(--surface);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--primary);
+  box-shadow: var(--shadow);
+}
+
+.service-icon {
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(126, 69, 146, 0.08);
+  color: var(--primary);
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.service-card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.service-card p {
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* ============================================================
+   TEAM
+============================================================ */
+
+.team {
+  max-width: var(--max-w);
+  margin: 6rem auto;
+  padding: 0 1.25rem;
+}
+
+.team-wrapper {
+  overflow-x: auto;
+  scrollbar-width: none;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 1rem;
+}
+
+.team-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.team-grid {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.team-card {
+  flex: 0 0 300px;
+  scroll-snap-align: start;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1.5rem;
+  overflow: hidden;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.team-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow);
+}
+
+.team-image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #d1d5db;
+  background-size: cover;
+  background-position: center;
+  /*
+    Add real photos per card once available, e.g.:
+    .team-card:nth-child(1) .team-image { background-image: url("./assets/team/john.jpg"); }
+  */
+}
+
+.team-content {
+  padding: 1.25rem;
+}
+
+.team-content h3 {
+  font-size: 1.35rem;
+  margin-bottom: 0.25rem;
+}
+
+.team-role {
+  display: block;
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.team-content p {
+  color: var(--text-muted);
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
+/* ============================================================
+   CONTACT
+============================================================ */
+
+.contact {
+  max-width: var(--max-w);
+  margin: 6rem auto;
+  padding: 0 1.25rem;
+}
+
+.contact-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.contact-card {
+  background: var(--surface);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(205, 178, 102, 0.15);
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+}
+
+.contact-card h3 {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+  font-size: 1.5rem;
+}
+
+/* Form */
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+}
+
+/* Focus ring — required for keyboard accessibility (WCAG 2.4.7) */
+.form-group input:focus-visible,
+.form-group textarea:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-color: transparent;
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+/* Contact info */
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.info-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.info-item {
+  display: flex;
+  gap: 1rem;
+}
+
+.info-item i {
+  color: var(--primary);
+  font-size: 1.25rem;
+  margin-top: 0.25rem;
+}
+
+.info-item span {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.info-item p {
+  color: var(--text-muted);
+}
+
+/* Business hours
+   Selectors updated from span/p to dt/dd to match the <dl> element
+   used in the HTML refactor. Update here if you revert to divs. */
+
+.hours-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.hours-grid dt {
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.hours-grid dd {
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   RESPONSIVE — 500px: desktop nav, background swap
+============================================================ */
+
+@media (min-width: 500px) {
+  body {
+    background: url("./assets/bg-desktop.png") no-repeat center / cover;
+  }
+
+  /* Suppress the desktop background image in dark mode */
+  [data-theme="dark"] body {
+    background: var(--bg);
+  }
+
+  .menu-btn {
+    display: none;
+  }
+
+  .desktop-nav {
+    display: flex;
+    gap: 2rem;
+    margin-left: auto;
+  }
+
+  .desktop-nav a {
+    color: var(--text-muted);
+    transition: color 0.2s;
+  }
+
+  .desktop-nav a:hover {
+    color: var(--text);
+  }
+
+  .builds-grid {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  }
+}
+
+/* ============================================================
+   RESPONSIVE — 768px: centred floating header, grid layouts
+============================================================ */
+
+@media (min-width: 768px) {
+  /*
+    Fixed elements ignore margin: auto. left: 50% + translateX(-50%)
+    genuinely centres the header. Both transforms are combined into a
+    single declaration so .hide doesn't lose the horizontal offset.
+  */
+  .header {
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(100%, var(--max-w));
+    padding: 1.5rem 2rem;
+    border-radius: 0 0 var(--r-lg) var(--r-lg);
+  }
+
+  .header.hide {
+    transform: translateX(-50%) translateY(-100%);
+  }
+
+  .features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    overflow: visible;
+    max-width: var(--max-w);
+    margin: 4rem auto;
+    gap: 1.5rem;
+  }
+
+  .feature {
+    flex: initial;
+  }
+
+  .builds-grid {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hours-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ============================================================
+   RESPONSIVE — 1024px: hero two-column, contact layout
+============================================================ */
+
+@media (min-width: 1024px) {
+  .hero {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 2rem;
+    padding: 5rem 2rem;
+  }
+
+  .hero-content {
+    text-align: left;
+    align-items: flex-start;
+  }
+
+  .hero-media {
+    margin-top: 0;
+  }
+
+  .features {
+    margin: 0 auto;
+  }
+
+  .contact-grid {
+    grid-template-columns: 2fr 1fr;
+    align-items: start;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ============================================================
+   DARK MODE
+   Uses a data-theme attribute rather than prefers-color-scheme
+   so the manual toggle overrides the OS setting.
+   JS restores the persisted choice from localStorage on page load.
+============================================================ */
+
+[data-theme="dark"] {
+  --bg: #111111;
+  --surface: #181818;
+  --card-bg: rgba(24, 24, 24, 0.85);
+
+  --text: #ffffff;
+  --text-muted: #a1a1aa;
+
+  --border: #2b2b2b;
+  --border-accent: rgba(126, 69, 146, 0.25);
+
+  --overlay-bg: rgba(0, 0, 0, 0.25);
+}
+
+/* Suppress the mobile background image in dark mode.
+   The desktop image (≥500px) is handled inside its own breakpoint above. */
+[data-theme="dark"] body {
+  background: var(--bg);
+}

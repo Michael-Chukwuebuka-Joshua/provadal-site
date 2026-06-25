@@ -1,0 +1,710 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--
+      Descriptive summary used by search engines and social link previews.
+      Keep under 160 characters.
+    -->
+    <meta
+      name="description"
+      content="Provadal builds private, sovereign, and local AI systems. Run powerful AI with complete privacy, ownership, and control — no cloud required."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Audiowide&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+
+    <!--
+      More descriptive title improves browser tab readability and is the first
+      thing screen readers announce when a page loads.
+    -->
+    <title>Provadal — Private, Sovereign, Local AI</title>
+  </head>
+  <body>
+    <!--
+      SKIP LINK — lets keyboard-only users bypass the repeated header navigation
+      and jump straight to the page content.
+      Requires CSS to be visible only on focus, e.g.:
+        .skip-link { position: absolute; top: -9999px; }
+        .skip-link:focus { top: 1rem; left: 1rem; z-index: 9999; ... }
+    -->
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <!--
+      div.bg is a presentational wrapper for the full-bleed background image;
+      it carries no document meaning. If possible, replace with a CSS
+      pseudo-element on <body> to avoid wrapping semantic content in a
+      non-semantic div.
+    -->
+    <div class="bg">
+      <!--
+        <header> as a direct child of <body> implicitly carries role="banner" —
+        no need to declare it explicitly.
+      -->
+      <header class="header">
+        <!--
+          Logo link: href="/" is more accurate than "#" for a home link.
+          aria-label gives the link a single, unambiguous accessible name.
+          The <img> gets alt="" (empty / decorative) because the visible text
+          "Provadal" immediately beside it already names the brand — a non-empty
+          alt here would make screen readers announce the name twice.
+        -->
+        <a href="/" class="logo" aria-label="Provadal — go to homepage">
+          <div class="logo-mark">
+            <img src="assets/logo.png" alt="" />
+          </div>
+          <span class="logo-text">Provadal</span>
+        </a>
+
+        <div class="nav-btn">
+          <!--
+            aria-pressed reflects the toggle state of the theme switch.
+            Update it in JS when the theme changes:
+              toggleBtn.setAttribute('aria-pressed', isDark ? 'true' : 'false')
+          -->
+          <button
+            class="toggle-btn"
+            aria-label="Toggle colour theme"
+            aria-pressed="false"
+          >
+            <!-- Icon is decorative; the button's aria-label is the accessible name -->
+            <i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i>
+          </button>
+
+          <!--
+            aria-expanded must be kept in sync with the open/closed state in JS:
+              menuBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false')
+            aria-controls references the id of the element this button controls.
+          -->
+          <button
+            class="menu-btn"
+            aria-label="Open navigation menu"
+            aria-expanded="false"
+            aria-controls="mobile-nav-menu"
+          >
+            <i
+              class="fa-solid fa-ellipsis-vertical menu-icon"
+              aria-hidden="true"
+            ></i>
+          </button>
+
+          <!--
+            aria-label distinguishes this landmark from the mobile nav below.
+            Multiple <nav> elements on a page must each have a unique label
+            so AT users can tell them apart in the landmarks list.
+          -->
+          <nav class="desktop-nav" aria-label="Primary navigation">
+            <a href="#about">About</a>
+            <a href="#builds">Builds</a>
+            <a href="#contact">Contact</a>
+          </nav>
+        </div>
+
+        <!--
+          id="mobile-nav-menu" matches the aria-controls on .menu-btn above.
+          aria-hidden is managed by JS:
+            navMenu.setAttribute('aria-hidden', isOpen ? 'false' : 'true')
+          This hides the menu from AT when it's visually hidden.
+        -->
+        <nav
+          class="nav-menu"
+          id="mobile-nav-menu"
+          aria-label="Mobile navigation"
+          aria-hidden="true"
+        >
+          <div class="menu-content">
+            <div class="menu-section">
+              <!--
+                <ul> is the correct element for a navigation link list.
+                The existing CSS already targets .menu-items li, so this aligns
+                the markup with what the stylesheet already expects.
+                role="list" re-asserts list semantics in browsers/environments
+                that strip them when list-style is removed via CSS.
+              -->
+              <ul class="menu-items" role="list">
+                <li><a href="#about" class="items">About</a></li>
+                <li><a href="#builds" class="items">Builds</a></li>
+                <li><a href="#contact" class="items">Contact us</a></li>
+              </ul>
+
+              <!--
+                Each social icon link has no visible text, so aria-label provides
+                the accessible name. The <i> icon itself is decorative.
+              -->
+              <div class="socials">
+                <a href="" aria-label="Provadal on Facebook">
+                  <i class="fa-brands fa-facebook" aria-hidden="true"></i>
+                </a>
+                <a href="" aria-label="Provadal on X (Twitter)">
+                  <i class="fa-brands fa-x-twitter" aria-hidden="true"></i>
+                </a>
+                <a href="" aria-label="Provadal on YouTube">
+                  <i class="fa-brands fa-youtube" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </header>
+
+      <!--
+        id="main-content" is the target for the skip link at the top.
+        <main> implicitly carries role="main"; no explicit role needed.
+      -->
+      <main id="main-content">
+        <!-- ============================================================
+             HERO
+        ============================================================ -->
+        <section class="hero" aria-labelledby="hero-heading">
+          <div class="hero-content">
+            <span class="badge">
+              <!-- Decorative shape; conveys no information -->
+              <div class="dot" aria-hidden="true"></div>
+              Built for the future
+            </span>
+
+            <!--
+              aria-label gives screen readers a complete, static version of the
+              headline so they aren't affected by the typewriter animation cycling
+              through different words. List every possible completion here.
+            -->
+            <h1
+              id="hero-heading"
+              aria-label="Build AI that is Private. Sovereign. Local. Unstoppable."
+            >
+              Build AI that is
+              <!--
+                aria-hidden removes the animated span from the accessibility
+                tree entirely; the full meaning is already in the h1 aria-label.
+              -->
+              <span
+                class="typed-word"
+                id="typed-word"
+                aria-hidden="true"
+              ></span>
+            </h1>
+
+            <p>
+              Run powerful AI locally with complete privacy, ownership, and
+              control.
+            </p>
+
+            <div class="hero-actions">
+              <!-- Updated hrefs to point at the actual on-page sections -->
+              <a href="#contact" class="btn-primary">Contact Us</a>
+              <a href="#builds" class="btn-secondary">See Our Work</a>
+            </div>
+          </div>
+
+          <div class="hero-media">
+            <!--
+              Descriptive alt text answers "what is shown and why does it matter?"
+              rather than just describing the file name.
+            -->
+            <img
+              src="assets/new-vid.png"
+              alt="Screenshot of a Provadal AI assistant running locally on a desktop — no internet connection required"
+            />
+          </div>
+
+          <!--
+            Placeholder / decorative card element. aria-hidden removes it from
+            the accessibility tree until it contains real, meaningful content.
+          -->
+          <div class="cards" aria-hidden="true">
+            <div class="card"></div>
+          </div>
+        </section>
+
+        <!-- ============================================================
+             FEATURES
+        ============================================================ -->
+        <!--
+          This section has no visible heading, so aria-label provides its
+          accessible landmark name. Without it, AT users navigating by
+          landmarks would see an unnamed "region."
+        -->
+        <section class="features-wrapper" aria-label="Key features">
+          <div class="features">
+            <article class="feature">
+              <!--
+                Feature icons are decorative — the adjacent h3 text already
+                conveys the meaning. aria-hidden on both the wrapper and icon
+                prevents double-announcement.
+              -->
+              <div class="feature-icon" aria-hidden="true">
+                <i class="fa-solid fa-lock"></i>
+              </div>
+              <h3>100% Private</h3>
+              <p>Your data stays on your network. Always.</p>
+              <!-- Decorative accent bar -->
+              <span class="feature-accent" aria-hidden="true"></span>
+            </article>
+
+            <article class="feature">
+              <div class="feature-icon" aria-hidden="true">
+                <i class="fa-solid fa-server"></i>
+              </div>
+              <h3>Run Locally</h3>
+              <p>Designed to run on your infrastructure.</p>
+              <span class="feature-accent" aria-hidden="true"></span>
+            </article>
+
+            <article class="feature">
+              <div class="feature-icon" aria-hidden="true">
+                <i class="fa-solid fa-bolt"></i>
+              </div>
+              <h3>No Subscriptions</h3>
+              <p>One-time deployment. No recurring fees.</p>
+              <span class="feature-accent" aria-hidden="true"></span>
+            </article>
+          </div>
+        </section>
+
+        <!-- ============================================================
+             BUILDS
+        ============================================================ -->
+        <!--
+          aria-labelledby links the section landmark to its visible h2,
+          so AT users see a meaningful label when navigating by landmarks.
+        -->
+        <section class="builds" id="builds" aria-labelledby="builds-heading">
+          <div class="section-header">
+            <span class="badge section-tag">
+              <div class="dot" aria-hidden="true"></div>
+              What We Build
+            </span>
+
+            <h2 id="builds-heading">
+              AI solutions that <span class="italic">work.</span>
+            </h2>
+
+            <p>
+              We design and deploy local AI systems tailored to your
+              organisation's needs, ensuring your data stays where it belongs.
+            </p>
+          </div>
+
+          <div class="builds-grid">
+            <article class="build-card">
+              <!--
+                Build images were missing alt attributes entirely — a WCAG 1.1.1
+                failure. Descriptive alt text briefly explains what is shown and
+                why it is relevant to the card content.
+              -->
+              <img
+                class="build-image"
+                src="assets/ChatAssistant.png"
+                alt="Chat interface of a private AI assistant operating on local infrastructure with no cloud dependency"
+              />
+              <h3>Private AI Assistants</h3>
+              <p>
+                Deploy intelligent assistants that operate entirely within your
+                infrastructure without relying on cloud services.
+              </p>
+            </article>
+
+            <article class="build-card">
+              <img
+                class="build-image"
+                src="assets/OCR.png"
+                alt="Document intelligence tool extracting, summarising, and searching text from uploaded files locally"
+              />
+              <h3>Document Intelligence</h3>
+              <p>
+                Extract, search, summarise, and analyse large volumes of
+                documents securely using local AI models.
+              </p>
+            </article>
+
+            <article class="build-card">
+              <img
+                class="build-image"
+                src="assets/Chatbot.png"
+                alt="Private chatbot interface handling customer support queries without sending data to external servers"
+              />
+              <h3>Private Chatbots</h3>
+              <p>
+                Build customer support and internal knowledge assistants that
+                keep sensitive information private.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <!-- ============================================================
+             SERVICES
+        ============================================================ -->
+        <section class="services" aria-labelledby="services-heading">
+          <div class="section-header">
+            <span class="section-tag badge">
+              <div class="dot" aria-hidden="true"></div>
+              Additional Services
+            </span>
+
+            <h2 id="services-heading">
+              More Ways We Can <span class="italic">Help</span>
+            </h2>
+
+            <p>
+              Beyond AI deployment, we provide specialised services to help
+              individuals and organisations unlock the full potential of modern
+              technology.
+            </p>
+          </div>
+
+          <div class="services-grid">
+            <article class="service-card">
+              <!-- Decorative; adjacent h3 provides the meaning -->
+              <div class="service-icon" aria-hidden="true">
+                <i class="fa-solid fa-network-wired"></i>
+              </div>
+              <h3>Network Infrastructure</h3>
+              <p>
+                Design, deploy, and secure home, office, and enterprise networks
+                built for performance, reliability, and growth.
+              </p>
+            </article>
+
+            <article class="service-card">
+              <div class="service-icon" aria-hidden="true">
+                <i class="fa-solid fa-shield-halved"></i>
+              </div>
+              <h3>Cybersecurity Solutions</h3>
+              <p>
+                Protect your digital assets through AI-powered threat detection,
+                automated remediation, and proactive security monitoring.
+              </p>
+            </article>
+
+            <article class="service-card">
+              <div class="service-icon" aria-hidden="true">
+                <i class="fa-solid fa-graduation-cap"></i>
+              </div>
+              <!--
+                & must be escaped as &amp; in HTML to avoid ambiguous ampersand
+                parse errors, particularly in XHTML-mode parsers and validators.
+              -->
+              <h3>AI Education &amp; Training</h3>
+              <p>
+                Learn how to adopt and utilise AI responsibly through workshops,
+                consulting, and hands-on educational programmes.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <!-- ============================================================
+             ABOUT / TEAM
+             id="about" satisfies the #about anchor from the nav
+        ============================================================ -->
+        <section id="about" class="team" aria-labelledby="team-heading">
+          <div class="section-header">
+            <span class="section-tag badge">
+              <div class="dot" aria-hidden="true"></div>
+              Meet The Team
+            </span>
+
+            <h2 id="team-heading">
+              The People Behind <span class="italic">Provadal</span>
+            </h2>
+
+            <p>
+              The engineers, designers, and strategists building secure AI
+              solutions for organisations worldwide.
+            </p>
+          </div>
+
+          <div class="team-wrapper">
+            <div class="team-grid">
+              <article class="team-card">
+                <!--
+                  Empty <div> placeholders for team photos.
+                  role="img" + aria-label gives each one an accessible name now.
+                  When a real photo is available, replace the div with:
+                    <img class="team-image" src="john-doe.jpg" alt="John Doe" />
+                -->
+                <div
+                  class="team-image"
+                  role="img"
+                  aria-label="Photo of John Doe (placeholder)"
+                ></div>
+                <div class="team-content">
+                  <h3>John Doe</h3>
+                  <span class="team-role">Founder &amp; CEO</span>
+                  <p>
+                    Leads company strategy and oversees the deployment of
+                    private AI systems.
+                  </p>
+                </div>
+              </article>
+
+              <article class="team-card">
+                <div
+                  class="team-image"
+                  role="img"
+                  aria-label="Photo of Jane Smith (placeholder)"
+                ></div>
+                <div class="team-content">
+                  <h3>Jane Smith</h3>
+                  <span class="team-role">AI Engineer</span>
+                  <p>
+                    Builds and optimises AI models designed for on-premise
+                    infrastructure.
+                  </p>
+                </div>
+              </article>
+
+              <article class="team-card">
+                <div
+                  class="team-image"
+                  role="img"
+                  aria-label="Photo of Michael Johnson (placeholder)"
+                ></div>
+                <div class="team-content">
+                  <h3>Michael Johnson</h3>
+                  <span class="team-role">Network Architect</span>
+                  <p>
+                    Designs secure network environments for businesses and
+                    institutions.
+                  </p>
+                </div>
+              </article>
+
+              <article class="team-card">
+                <div
+                  class="team-image"
+                  role="img"
+                  aria-label="Photo of Sarah Williams (placeholder)"
+                ></div>
+                <div class="team-content">
+                  <h3>Sarah Williams</h3>
+                  <span class="team-role">Cybersecurity Analyst</span>
+                  <p>
+                    Specialises in threat detection and automated incident
+                    response systems.
+                  </p>
+                </div>
+              </article>
+
+              <article class="team-card">
+                <div
+                  class="team-image"
+                  role="img"
+                  aria-label="Photo of David Brown (placeholder)"
+                ></div>
+                <div class="team-content">
+                  <h3>David Brown</h3>
+                  <span class="team-role">Product Designer</span>
+                  <p>
+                    Creates intuitive user experiences that simplify complex
+                    technologies.
+                  </p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================
+             CONTACT
+        ============================================================ -->
+        <section class="contact" id="contact" aria-labelledby="contact-heading">
+          <div class="section-header">
+            <span class="section-tag badge">
+              <div class="dot" aria-hidden="true"></div>
+              Contact Us
+            </span>
+
+            <h2 id="contact-heading">
+              Let's Build Something <span class="italic">Together</span>
+            </h2>
+
+            <p>
+              Have questions, want to hire or partner with us — we'd love to
+              hear from you.
+            </p>
+          </div>
+
+          <div class="contact-grid">
+            <div class="contact-card">
+              <h3>Get In Touch</h3>
+
+              <!--
+                novalidate defers validation to JS so you can display custom
+                inline error messages. Remove it to use native browser validation.
+                aria-label distinguishes this form landmark in AT landmark lists.
+              -->
+              <form
+                class="contact-form"
+                action="#"
+                method="post"
+                novalidate
+                aria-label="Contact form"
+              >
+                <div class="form-row">
+                  <div class="form-group">
+                    <!--
+                      for/id pairing is the only reliable way to associate a
+                      <label> with its control — placeholder alone is not
+                      accessible because it disappears on input and has low contrast.
+                      autocomplete hints help browsers and password managers.
+                    -->
+                    <label for="contact-name">Name</label>
+                    <input
+                      type="text"
+                      id="contact-name"
+                      name="name"
+                      placeholder="Enter your name"
+                      autocomplete="name"
+                      required
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="contact-phone">Phone Number</label>
+                    <input
+                      type="tel"
+                      id="contact-phone"
+                      name="phone"
+                      placeholder="Enter your phone number"
+                      autocomplete="tel"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="contact-email">Email</label>
+                  <input
+                    type="email"
+                    id="contact-email"
+                    name="email"
+                    placeholder="Enter your email"
+                    autocomplete="email"
+                    required
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="contact-message">Your Message</label>
+                  <textarea
+                    id="contact-message"
+                    name="message"
+                    rows="6"
+                    placeholder="Tell us about your project..."
+                    required
+                  ></textarea>
+                </div>
+
+                <!--
+                  type="submit" must be explicit — the default type for a <button>
+                  outside a form is "button", not "submit". Being explicit also
+                  prevents accidental form submissions from untyped buttons elsewhere.
+                -->
+                <button type="submit" class="btn-primary">Send Message</button>
+              </form>
+            </div>
+
+            <div class="contact-info">
+              <div class="contact-card">
+                <h3>Contact Information</h3>
+
+                <!--
+                  NOTE: <dl> (description list) would be the most semantically
+                  correct element here for label–value pairs (phone, address, email).
+                  Keeping the current structure to avoid breaking CSS selectors,
+                  but consider refactoring to <dl>/<dt>/<dd> in a future pass.
+                -->
+                <div class="info-grid">
+                  <div class="info-item">
+                    <!-- Icon is decorative; the adjacent text conveys the meaning -->
+                    <i class="fa-solid fa-phone" aria-hidden="true"></i>
+                    <div>
+                      <span>Phone</span>
+                      <!--
+                        tel: link makes the number tappable on mobile and
+                        readable by screen readers as a dialable number.
+                      -->
+                      <p><a href="tel:+2348000000000">+234 800 000 0000</a></p>
+                    </div>
+                  </div>
+
+                  <div class="info-item">
+                    <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                    <div>
+                      <span>Address</span>
+                      <!--
+                        <address> semantically marks up contact / location
+                        information for its nearest sectioning ancestor.
+                      -->
+                      <address>Anambra, Nigeria</address>
+                    </div>
+                  </div>
+
+                  <div class="info-item">
+                    <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+                    <div>
+                      <span>Email</span>
+                      <!-- mailto: link lets users open their mail client directly -->
+                      <p>
+                        <a href="mailto:architect@provadal.com">
+                          architect@provadal.com
+                        </a>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="contact-card">
+                <h3>Business Hours</h3>
+
+                <!--
+                  <dl> is the semantically correct element for term–definition
+                  pairs such as day names and their opening times.
+                  NOTE: CSS currently targets span and p inside .hours-grid;
+                  update those selectors to dt and dd after this change.
+                -->
+                <dl class="hours-grid">
+                  <div>
+                    <dt>Monday – Friday</dt>
+                    <dd>9:00 am – 6:00 pm</dd>
+                  </div>
+                  <div>
+                    <dt>Saturday</dt>
+                    <dd>10:00 am – 4:00 pm</dd>
+                  </div>
+                  <div>
+                    <dt>Sunday</dt>
+                    <dd>Closed</dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <!-- /.bg -->
+
+    <!--
+      Purely visual backdrop behind the open mobile menu.
+      aria-hidden keeps it out of the accessibility tree since it conveys
+      no information — its only role is to dim the background.
+    -->
+    <div class="menu-overlay" aria-hidden="true"></div>
+
+    <script src="index.js"></script>
+  </body>
+</html>
