@@ -868,6 +868,127 @@ body {
 .hours-grid dd {
   color: var(--text-muted);
 }
+/* =====================================
+   FOOTER
+===================================== */
+
+.footer {
+  margin-top: 6rem;
+
+  border-top: 1px solid var(--border);
+
+  padding: 4rem 1.25rem 2rem;
+}
+
+.footer-content {
+  max-width: 1200px;
+
+  margin: 0 auto;
+
+  display: grid;
+
+  gap: 3rem;
+}
+
+/* =====================================
+   BRAND
+===================================== */
+
+.footer-brand p {
+  margin-top: 1rem;
+
+  max-width: 30ch;
+
+  line-height: 1.8;
+
+  color: var(--text-muted);
+}
+
+/* =====================================
+   LINKS
+===================================== */
+
+.footer-links,
+.footer-socials {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.footer-links h4,
+.footer-socials h4 {
+  font-size: 1rem;
+
+  margin-bottom: 0.5rem;
+}
+
+.footer-links a {
+  color: var(--text-muted);
+
+  transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: var(--primary);
+}
+
+/* =====================================
+   SOCIALS
+===================================== */
+
+.social-icons {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-icons a {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--border);
+
+  border-radius: 50%;
+
+  color: var(--text-muted);
+
+  transition: all 0.3s ease;
+}
+
+.social-icons a:hover {
+  color: white;
+
+  background: var(--primary);
+
+  border-color: var(--primary);
+
+  transform: translateY(-3px);
+}
+
+/* =====================================
+   COPYRIGHT
+===================================== */
+
+.footer-bottom {
+  max-width: 1200px;
+
+  margin: 3rem auto 0;
+
+  padding-top: 1.5rem;
+
+  border-top: 1px solid var(--border);
+
+  text-align: center;
+}
+
+.footer-bottom p {
+  color: var(--text-muted);
+
+  font-size: 0.9rem;
+}
 
 /* ============================================================
    RESPONSIVE — 500px: desktop nav, background swap
@@ -957,6 +1078,13 @@ body {
 
   .hours-grid {
     grid-template-columns: repeat(3, 1fr);
+  }
+  .footer-content {
+    grid-template-columns:
+      2fr
+      1fr
+      1fr
+      1fr;
   }
 }
 
